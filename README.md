@@ -2,7 +2,7 @@
 
 ### Frontend
 #### Basic structures
-[] login page struct
+- [] login page struct
 [] Signup page struct
 [] home page struct
 [] deposit page struct

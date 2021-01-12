@@ -22,4 +22,5 @@ lib-cov
 coverage
 *.lcov
 
+*.env
 node_modules

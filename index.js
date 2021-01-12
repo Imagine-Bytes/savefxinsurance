@@ -7,4 +7,4 @@ app.get('/', (req, res, next) => {
     res.send('<p>HI</p>')
 })
 
-app.listen(8080, port => console.log(`Listening on port ${port}`))
+app.listen(process.env.PORT || 5000, port => console.log(`Listening on port ${port}`))

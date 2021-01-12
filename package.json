@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "nyc --reporter=lcov --reporter=text mocha -r @babel/register ./src/test/index.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

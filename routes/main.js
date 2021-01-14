@@ -6,6 +6,17 @@ const id = require("uuid");
 const logOut = require("./logOut");
 const router = express.Router();
 
+
+
+
+router.get("/", (req, res) => {
+  res.render("home.ejs")
+})
+router.get("/about", (req, res) => {
+ res.render("about.ejs")
+})
+
+
 //Register User
 router.post("/register", (req, res) => {
   
@@ -48,10 +59,9 @@ router.post("/register", (req, res) => {
       .then((user) => {
         if (user) {
           if (bcrypt.compareSync(req.body.password, user.password)) {
-            const id = user.id;
-            const link = user.tree_link;
+            
             const username = user.username;
-            generateToken(res, link, id, username);
+            generateToken(res,  username);
             return;
           } else {
             res.json({ error: "Password is incorrect" });
@@ -65,6 +75,12 @@ router.post("/register", (req, res) => {
       });
   });
 
+router.get("/", (req, res) => {
+   res.render("home.ejs")
+})
+router.get("/about", (req, res) => {
+  res.render("about.ejs")
+})
 
   
 // Log Out User

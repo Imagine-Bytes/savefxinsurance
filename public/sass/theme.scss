@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+// Set your brand colors
+$dark-blue: #11113d;
+$yellow: #cece0e;
+
+// Update Bulma's global variables
+$primary: $dark-blue;
+$info: $yellow;
+
+// Import only what you need from Bulma
+@import "../../mybulma/bulma-0.9.1/bulma/bulma.sass";

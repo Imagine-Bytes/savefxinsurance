@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-// const allRoutes = require("./routes/main");
+const allRoutes = require("./routes/main");
+const cors = require("cors")
 const PORT = process.env.PORT || 5000;
 
+app.use(cors());
+app.use(express.json());
 dotenv.config();
 
 const connectionString = process.env.DB_URI;
@@ -14,6 +17,8 @@ mongoose
   .connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then((res) => {
     console.log("MongoDB Running Successfully");
@@ -22,11 +27,10 @@ mongoose
     console.log("MongoDB not Connected ");
   });
 
-app.engine("ejs");
-app.set("view engine", "ejs");
+
+app.use("/", allRoutes);
 
 //Listen
 app.listen(PORT, () => {
   console.log("Server is running...");
-  console.log(process.env.DB_URI);
 });

@@ -27,24 +27,24 @@ const sendMail = (req, user) => {
       from: "Iloenyenwa Victor",
       to: req.body.email,
       subject: "Your Activation Link for your Account",
-      html: ` <h3 style=" color:rgb(92, 61, 180); font-size: 50px; font-weight: lighter; font-family: sans-serif;">
+      html: ` <h3 style=" color:rgb(92, 61, 180); font-size: xx-large; font-weight: lighter; font-family: sans-serif;">
       Welcome to SaveFX </h3>
       <p style="font-size: x-large; font-weight: lighter; font-family: sans-serif;">
          Glad to see you join our ever-growing inverstment platform.
          <br>
-         Just one more step to go
+         Just one more step to go...
          <br>
-            Verify your account now and discover a new world of financial possibilities!</p>
+            Verify your account now and discover a new world of financial possibilities !!</p>
       <br>
       <br>
-    <a href="${baseUrl}/verification/verify-account/${user._id}/${secretCode}" target="_blank" style="text-decoration:none; cursor:pointer">  <button style="width: fit-content; background-color:rgb(146, 45, 212); color:white; border: none; appearance: none; height:60px; border-radius: 10px 10px ;padding: 15px 15px;font-family: sans-serif; font-size: x-large; font-weight: lighter;"> 
+    <a href="${baseUrl}/verification/verify-account/${user._id}/${secretCode}" target="_blank" style="text-decoration:none; cursor:pointer">  <button style="width: fit-content; background-color:rgb(146, 45, 212); color:white; border: none; appearance: none; outline:none; height:60px; border-radius: 10px 10px ;padding: 15px 15px;font-family: sans-serif; font-size: x-large; font-weight: lighter;"> 
          Verify your Email Address </button> </a>
          <br>
          <br>
          <br>
          <br>
-         <p style="font-size: large; font-weight: lighter; font-family: sans-serif;text-align: left; "> Thank you... </p>
-         <p style="font-size: large; font-weight: lighter; font-family: sans-serif;text-align: left;margin-top: 0px;"> SaveFX Team.</p>`,
+         <p style="font-size: x-large; font-weight: lighter; font-family: sans-serif;text-align: left; "> Thank you... </p>
+         <p style="font-size: x-large; font-weight: lighter; font-family: sans-serif;text-align: left;margin-top: 0px;"> SaveFX Team.</p>`,
       };
     
   emailService

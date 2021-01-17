@@ -1,7 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const sendMail = require("../utils/sendMail")
+const sendCode = require("../utils/sendCode")
 const Code = require("../models/secretCode");
+const cryptoRandomString = require("crypto-random-string");
 const generateToken = require("../utils/generateToken");
 const router = express.Router();
 const User = require("../models/user");
@@ -43,6 +45,11 @@ router.post("/register", (req, res) => {
     });
 });
 
+// Google Oauth Register
+
+// Google Oauth Login
+
+
 // Login User
 router.post("/login", (req, res) => {
   User.findOne({ email: req.body.email })
@@ -65,9 +72,7 @@ router.post("/login", (req, res) => {
 });
 
 // User Account Verification
-router.get(
-  "/verification/verify-account/:userId/:secretCode",
-  async (req, res) => {
+router.get("/verification/verify-account/:userId/:secretCode", async (req, res) => {
       try {
           const user = await User.findById(req.params.userId);
           const response = await Code.findOne({
@@ -105,83 +110,70 @@ router.get(
 // Verification Redirect Route
 router.get("/account/verified", (req, res) => {
   res.send("<h1> You're Verified</h1>")
- })
+  // res.redirect("/home")
+})
 
 
-// Reset Password route  #1
-// To request for Reset Code
- router.post("/resetpassword/getcode", (req, res) => {
-   const email = req.body.email;
-   User.findOne({ email })
-     .then((user) => {
-       if (user) {
-         sendCode(req)
-       } else {
-        res.json({message: "The provided email is not registered"})
-       }
-     
-     })
-     .catch((err) => {
-     res.json({err})
-   })
-
- });
-
-// Reset Password route  #2
-// To verify wheter the code given by user to match  the reset code 
- router.post("/resetpassword/verifycode", (req, res) => {
-   const email = req.body.email;
-   const resetCode = req.body.code;
-   Code.findOne({ email })
-     .then((code) => {
-       if (code) {
-         if (code.code === resetCode) {
-           let redirectPath;
-
-              if (process.env.NODE_ENV == "production") {
-                  redirectPath = `${req.protocol}://${req.get(
-                      "host"
-                  )}resetpassword/reset`;
-              } else {
-                  redirectPath = `http://127.0.0.1:5000/resetpassword/reset`;
-              }
-
-              res.redirect(redirectPath);
-         } else {
-           res.json({message:"The code you entered was incorrect"})
-         }
-       } else {
-         res.json({message:"Reset code doesn't exist"})
-       }
-     
-   })
-
- });
-
- // Reset Password route  #3
-// Actual reset route , here the new password the user inputs is set as his account password
- router.post("/resetpassword/reset", (req, res) => {
+// Password Reset Route #1
+// Sends Reset Link to a Registered Email Address
+router.post("/forgot", (req, res) => {
   const email = req.body.email;
-   
-  bcrypt.hash(req.body.password, 10, (err, hash) => {
-    const hashedPassword = hash;
-    User.updateOne({ email }, { password: hashedPassword })
-      .then((user) => {
-        res.json({ message: "Password Updated" })
-      })
-      .catch((err) => {
-        res.json({ err })
-      });
-    Code.deleteOne({ email })
-      .then((user) => {
-        res.json({ message: "Delete Done." })
-      })
-      .catch((err) => {
-        res.json({ err })
-      });
-    
+
+  User.findOne({ email })
+    .then((user) => {
+      if (!user) {
+      res.json({message:"This email address is not registered"})
+      } else {
+        const token = cryptoRandomString({ length: 12 });
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.save((err,user) => {
+          if (err) return console.log({err});
+          console.log("Token updated")
+          sendCode(req, user, token)
+        })
+      }
+      return
+    })
+    .catch((err) => {
+    res.json({message:err})
+  })
+})
+
+// Password Reset Route #2
+// Verifies Token and Renders Reset Page
+router.get('/reset/:token', (req, res) => {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+    if (!user) {
+      res.json({message:"Password reset token is invalid or has expired."})
+      return res.redirect('/forgot');
+    }
+    res.send("<h1> You can reset your password</h1>")
+    // res.render('reset', {user: req.user});
   });
-  
+});
+
+
+// Password Reset Route #3
+// Verifies Token and Sets New Password for the account
+router.post('/reset/:token', (req, res) => {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+    if (!user) {
+      res.json({ message: "Password reset token is invalid or has expired." })
+      return res.redirect('/forgot');
+    }
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      user.password = hash;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+      user.save((err) => {
+        res.json({ message: "Password has been reset" })
+      });
+    });
+
+
+
+  });
 
 });
 

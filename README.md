@@ -31,10 +31,10 @@
 
 ### Backend
 - [ ] routes
-✔✔ auth with oauth
+### ✔✔ auth with oauth
  balance increment
 - [ ] flutterwave integration
-✔✔ confirm email address
-✔✔ forgot password
+### ✔✔ confirm email address
+### ✔✔ forgot password
 - [ ] customer care messaging system
 - [ ] admin controls (delete accounts, confirm withdrawals and bitcoin deposits, customer care service)

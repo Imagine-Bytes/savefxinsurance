@@ -32,7 +32,7 @@
 ### Backend
 - [ ] routes
 ### ✔✔ auth with oauth
- balance increment
+- [ ] balance increment
 - [ ] flutterwave integration
 ### ✔✔ confirm email address
 ### ✔✔ forgot password

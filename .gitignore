@@ -19,7 +19,7 @@ pids
 lib-cov
 request.rest
 request2.rest
-
+test.js
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov

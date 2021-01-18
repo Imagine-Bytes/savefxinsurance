@@ -7,6 +7,30 @@ const cryptoRandomString = require("crypto-random-string");
 const generateToken = require("../utils/generateToken");
 const router = express.Router();
 const User = require("../models/user");
+const dotenv = require("dotenv");
+const Oauth = require('../utils/Oauth');
+const userInfo = require('../utils/getUserInfo');
+dotenv.config()
+
+
+
+// Home Page 
+router.get("/home", (req, res) => {
+  res.send("<h1> You've successfully signed in with Google bruh</h1>");
+  Oauth(req.query.code)
+    .then((token) => {
+      userInfo(token)
+        .then((info) => {
+          console.log(info);
+        })
+        .catch((err) => {
+          console.log({err});
+        });
+    })
+    .catch((err) => {
+      console.log({ err });
+    });
+});
 
 // Register User
 router.post("/register", (req, res) => {
@@ -44,11 +68,6 @@ router.post("/register", (req, res) => {
       return;
     });
 });
-
-// Google Oauth Register
-
-// Google Oauth Login
-
 
 // Login User
 router.post("/login", (req, res) => {

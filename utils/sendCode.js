@@ -1,4 +1,7 @@
 const emailService = require("../utils/nodemailer");
+const dotenv = require("dotenv")
+
+dotenv.config()
 
 
 
@@ -8,7 +11,7 @@ const sendCode = (req, user, token) => {
 
   // Send Confirmation Email
     const data = {
-      from: "Iloenyenwa Victor",
+      from: process.env.EMAIL_USERNAME,
       to: user.email,
       subject: "Password Reset Code",
       html: ` <h3 style=" color:rgb(92, 61, 180); font-size: 50px; font-weight: lighter; font-family: sans-serif;">

@@ -1,119 +1,48 @@
-body {
-    background-color:var(--text-white);
+button {
+    border: none;
+    border-radius: 0.5em;
 }
 
 .landing {
-    padding: 2em;
-    font-family: var(--body-font);
-    background-color: var(--dark-blue);
-    clip-path: polygon(0 0, 100% 0%, 100% 97%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
 }
 
-.landing__message {
-    color: var(--text-white);
-}
-
-.heading {
-    font-size: 1.7em;
-    padding: 0.5em 0;
-    font-weight: 700;
-}
-
-.sub-heading {
-    font-weight: 700;
-}
-
-.message {
-    text-align: left;
-    padding: 0.5em 0 3em;
-}
-
-.landing__photo {
-    display: flex;
-    justify-content: center;
-}
-
-.btn-bar {
-    padding: 3em 1em;
-    text-align: center;
-}
-
-.btn {
-    border: none;
-    background-color: var(--yellow);
-    font-size: 1em;
-    padding: 0.8em 2em;
-    border-radius: 5%;
-}
-
-.btn-dark {
-    background-color: var(--dark-blue);
-    color: var(--yellow);
-}
-
-.briefing {
-    padding: 2em 2em 0;
-}
-
-.doc-headers {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--dark-blue);
-}
-
-.briefing__blank {
-    margin: 0.5em 0;
-    height: 10em;
+.square {
     width: 100%;
-    background-color: var(--light-grey);
+    height: 20em;
+    background-color: #d0d0d0;
+    margin: 0 auto;
 }
 
-.reviews {
-    padding: 0 2em;
-    background-color: white;
-}
-
-.center__heading {
-    text-align: center;
-}
-
-.opinion {
-    display: flex;
-    padding: 0.6em;
-}
-
-.opinions {
-    color: var(--dark-grey);
-    display: flex;
-    width: 800px;
-    padding: 2em 0;
-}
-
-.opinion__pic {
-    border: 1px solid var(--dark-grey);
+.circle  {
+    height: 6em;
+    width: 6em;
     border-radius: 50%;
+    background-color: #d0d0d0;
+    margin: 0 auto;
+}
+
+footer .circle {
     height: 4em;
     width: 4em;
-    margin: 0.6em;
 }
 
-.opinion__name {
-    font-weight: bold;
+.testimony {
+    width: 15em;
+    
 }
 
-.opinion__text {
-    width: 70%;
+.testimonials {
+    overflow: scroll;
 }
 
-
-.opinion__message {
-    font-size: 0.9em;
-}
-
-.join-us {
-    padding: 1em 2em 0;
-}
-
-.join-us-heading {
-    font-size: 1.3em;
-}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.testimonials::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .testimonials {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

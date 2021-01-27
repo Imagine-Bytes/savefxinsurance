@@ -4,7 +4,14 @@
   "description": "lightweight URL shortener",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imagine-Bytes/goldfxinsurance.git"
+
   },
   "author": "Imagine Bytes",
   "license": "ISC",

@@ -6,7 +6,7 @@
 
 - [ ] Signup page struct
 - [x] Login page struct
-- [ ] home page struct
+- [x] home page struct
 - [ ] deposit page struct
 - [ ] withdraw page struct
 - [ ] menu struct
@@ -19,7 +19,7 @@
 #### Styling (mobile first approach)
 - [ ] login page style
 - [x] Signup page style
-- [ ] home page style
+- [x] home page style
 - [ ] deposit page style
 - [ ] withdraw page style
 - [ ] menu style

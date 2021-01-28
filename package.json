@@ -1,7 +1,7 @@
 {
-  "name": "goldfxinsurance",
+  "name": "linkify",
   "version": "1.0.0",
-  "description": "An investment system",
+  "description": "lightweight URL shortener",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
@@ -11,21 +11,21 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Imagine-Bytes/goldfxinsurance.git"
+
   },
   "author": "Imagine Bytes",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Imagine-Bytes/goldfxinsurance/issues"
-  },
-  "homepage": "https://github.com/Imagine-Bytes/goldfxinsurance#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "crypto-random-string": "^3.3.0",
     "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "express-ejs-layouts": "^2.5.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.9"
+    "mongoose": "^5.9.18",
+    "nodemailer": "^6.4.17",
+    "nodemon": "^2.0.4",
+    "query-string": "^6.13.8"
   }
 }

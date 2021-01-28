@@ -1,0 +1,17 @@
+input {
+    width: 100%;
+    border: none;
+    border-radius: 1em;
+}
+
+label {
+    position: relative;
+    top: 2.5rem;
+    left: 1rem;
+    transition: all 500ms;
+}
+
+.label-move {
+    top: 0;
+    left: 0;
+}

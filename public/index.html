@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="has-navbar-fixed-top">
+<html lang="en" class="has-navbar-fixed-top has-background-light">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./css/theme.css">
+	<link rel="stylesheet" href="./css/header.css">
 	<link rel="stylesheet" href="./css/home.css">
+	<link rel="stylesheet" href="./css/login.css">
 	<title>SaveFXInsurance</title>
 </head>
-<body class="is-size-7-touch is-size-6 has-background-light">
+<body class="is-size-7-touch is-size-6">
 
 	<!-- NAVIGATION -->
 	<nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
@@ -134,7 +136,7 @@
 
 	<footer class="has-background-primary has-text-white pb-6">
 		<div class="is-flex p-6 is-justify-content-space-between">
-			<div class="pr-6 is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+			<div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
 				<p>Lorem ipsum dolor sit.</p>
 				<p>Lorem ipsum dolor sit.</p>
 				<p>Lorem ipsum dolor sit.</p>
@@ -154,7 +156,33 @@
 		</div>
 	</footer>
 
+	<!-- I could have done this on another file but got confused on how to set up ejs file structure -->
+	<!-- <div class="page">
+		<div class="container px-5">
+			<h1 class="is-size-3 has-text-centered py-6 has-text-weight-bold">Login</h1>
+
+			<div>
+				<div class="mb-6">
+					<label class="is-block pb-2" for="username">Username</label>
+					<input class="is-block p-3 is-size-6" type="text" name="username" id="username">
+				</div>
+				<div class="mb-6">
+					<label class="is-block pb-2" for="password">Password</label>
+					<input class="is-block p-3 is-size-6" type="password" name="password" id="password">
+				</div>
+
+				<p class="has-text-centered">Forgot your password? Click <a href="#">here</a></p>
+
+				<div class="has-text-centered pt-6 pb-6">
+					<button class="py-3 px-5 has-background-info has-text-primary">Login</button>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="./js/header.js"></script>
+	<script src="./js/header.js"></script>
+	<script src="./js/login.js"></script>
 </body>
 </html>

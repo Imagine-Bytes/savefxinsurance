@@ -12,9 +12,9 @@ $(document).ready(function() {
 
   window.addEventListener('scroll', function(){
       if (pageYOffset > 1) {
-        $(".navbar").css('box-shadow', '#1c1c3d 0 3px 5px')
+        $(".navbar").addClass('shadow')
       } else {
-        $(".navbar").css('box-shadow', 'none')
+        $(".navbar").removeClass('shadow')
       }
   })
   

@@ -30,11 +30,11 @@
 - [ ] admin style
 
 ### Backend
-- [ ] routes
 ### ✔✔ auth with oauth
-- [ ] balance increment
-- [ ] flutterwave integration
+### ✔✔ balance increment
 ### ✔✔ confirm email address
 ### ✔✔ forgot password
+- [ ] flutterwave integration
 - [ ] customer care messaging system
+- [ ] routes
 - [ ] admin controls (delete accounts, confirm withdrawals and bitcoin deposits, customer care service)

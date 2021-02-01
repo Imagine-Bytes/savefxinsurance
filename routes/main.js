@@ -5,32 +5,90 @@ const sendCode = require("../utils/sendCode")
 const Code = require("../models/secretCode");
 const cryptoRandomString = require("crypto-random-string");
 const generateToken = require("../utils/generateToken");
+const saveFx = require("../utils/saveFx");
 const router = express.Router();
 const User = require("../models/user");
 const dotenv = require("dotenv");
 const Oauth = require('../utils/Oauth');
 const userInfo = require('../utils/getUserInfo');
-dotenv.config()
+// Allows access to environment variables
+dotenv.config();
+// Invokes the 10 Days Wallet Increment Function
+saveFx();
+
+// this is the Oauth Link that will be clicked by the user to begin the authentication process
+// the link should be used on the frontend on the href attribute of the sign-in with google button
+const oauthLink = "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&client_id=268077209573-51p0chpgvsomdupi1ig1s95gac6idm35.apps.googleusercontent.com&prompt=consent&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fhome&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile"
 
 
-
-// Home Page 
+// This is the Google redirect Page
+// Normally this should be a page where the user chooses a password for his account @Frontend
 router.get("/home", (req, res) => {
-  res.send("<h1> You've successfully signed in with Google bruh</h1>");
+  res.json({"message":"you've signed in with Google"});
   Oauth(req.query.code)
+// This registers the user with a pseudo-password which is meant to be updated immediately
     .then((token) => {
       userInfo(token)
         .then((info) => {
-          console.log(info);
+          const userData = {
+            firstName: info.given_name,
+            lastName:info.family_name,
+            email: info.email,
+            password: cryptoRandomString({ length: 6 }),
+          };
+          User.findOne({
+            email: req.body.email,
+          })
+            .then((user) => {
+              if (!user) {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                  userData.password = hash;
+                  User.create(userData)
+                    .then((user) => {
+                      console.log("User Registered");
+                      return
+                    })
+                    .catch((err) => {
+                      console.log({ err })
+                      return
+                    });
+                });
+              } else {
+                res.json({ error: "The provided email is registered already" });
+                return;
+              }
+            })
+            .catch((err) => {
+              res.json({ error: err });
+              return;
+            });
         })
         .catch((err) => {
-          console.log({err});
+          res.json({err});
         });
     })
     .catch((err) => {
-      console.log({ err });
+      res.json({ err });
     });
 });
+
+// replaces the pseudo-password with a password of the users' choice
+router.post("/setpassword", (req, res) => {
+  const email = req.body.email;
+
+  User.findOne({email})
+    .then((user) => {
+      bcrypt.hash(req.body.password, 10, (err, hash) => {
+        user.password = hash
+        user.save((err) => {
+          res.json({ message: "Password has been set" })
+        });
+      });
+  })
+  .catch((err)=>{
+    res.json({er})
+  })
+})
 
 // Register User
 router.post("/register", (req, res) => {
@@ -49,12 +107,12 @@ router.post("/register", (req, res) => {
           userData.password = hash;
           User.create(userData)
             .then((user) => {
-              console.log("User Registered");
+              res.json("User Registered");
               sendMail(req,user)
               return
             })
             .catch((err) => {
-              console.log({ err })
+              res.json({ err })
               return
             });
         });
@@ -195,6 +253,25 @@ router.post('/reset/:token', (req, res) => {
   });
 
 });
+
+// Balance Increment via Direct Deposit 
+// adequate security measures to verify increment would be implemented in the future
+router.post("/deposit-success", (req, res) => {
+  const email = req.body.email;
+  User.find({ email })
+      .then((user) => {
+          user.balance = user.balance + balanceAdded;
+          user.lastDepositDate = Date.now();
+        user.lastIncrementDate = Date.now();
+        user.save((err,user) => {
+          if (err) return console.log({err});
+          console.log("Deposit Successful...")
+        })
+      })
+      .catch((err) => {
+      res.json({err})
+  })
+})
 
 
 module.exports = router;

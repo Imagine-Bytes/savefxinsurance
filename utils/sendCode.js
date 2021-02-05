@@ -15,7 +15,7 @@ const sendCode = (req, user, token) => {
       to: user.email,
       subject: "Password Reset Code",
       html: ` <h3 style=" color:rgb(92, 61, 180); font-size: 50px; font-weight: lighter; font-family: sans-serif;">
-      SaveFX Investment </h3>
+      DevStack </h3>
       <p style="font-size: x-large; font-weight: lighter; font-family: sans-serif;">
       You are receiving this because you (or someone else) have requested the reset of the password for your account </p>
       <br>

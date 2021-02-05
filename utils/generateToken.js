@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const generateToken = (res, email) => {
+const generateToken = (res, username) => {
   const expiration =  60 * 60 * 24 * 3;
-  const token = jwt.sign({ link , email }, process.env.SECRET_KEY, {
+  const token = jwt.sign({ username }, process.env.SECRET_KEY, {
     expiresIn:  60 * 60 * 24 * 4,
   });
   return res.cookie('token', token, {

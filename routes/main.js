@@ -1,13 +1,13 @@
 const express = require("express");
 const defaultController = require("../controllers/default");
-const saveFx = require("../utils/saveFx");
+const cleanWater = require("../utils/saveFx");
 const router = express.Router();
 const dotenv = require("dotenv");
 
 dotenv.config();
 
 // Invokes the 10 Days Wallet Increment Function
-// saveFx();
+// cleanWater();
 
 // this is the Oauth Link that will be clicked by the user to begin the authentication process
 // the link should be used on the frontend on the href attribute of the sign-in with google button

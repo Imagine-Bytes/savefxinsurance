@@ -1,28 +1,27 @@
-const axios = require ('axios');
+import axios from 'axios';
 const dotenv = require("dotenv")
 
 dotenv.config()
 
+const  queryString = require('query-string');
 
-  async function getAuthCode (code) {
-      try {
-          const { data } = await axios({
-              url: `https://oauth2.googleapis.com/token`,
-              method: 'post',
-              data: {
-                  client_id: process.env.CLIENT_ID,
-                  client_secret: process.env.CLIENT_SECRET,
-                  redirect_uri: 'http://localhost:5000/home',
-                  grant_type: 'authorization_code',
-                  code,
-              },
-          });
-          console.log(data); // { access_token, expires_in, token_type, refresh_token }
-          return data.access_token;
-      }
-      catch {
-          console.log("Access token couldn't be secured")
-      }
+async function getAuthCode(code) {
+  const { data } = await axios({
+    url: 'https://github.com/login/oauth/access_token',
+    method: 'get',
+    params: {
+      client_id: process.env.APP_ID,
+      client_secret: process.env.APP_SECRET,
+      redirect_uri: 'http://localhost:5000/githublogin',
+      code,
+    },
+  });
+ 
+  const parsedData = queryString.parse(data);
+//   console.log(parsedData); // { token_type, access_token, error, error_description }
+  if (parsedData.error) throw new Error(parsedData.error_description)
+  return parsedData.access_token;
 };
-  
+
+
 module.exports = getAuthCode

@@ -22,12 +22,23 @@ const UserSchema = mongoose.Schema({
         default: "pending",
         required:false
     },
-    
+    balance: {
+        type: Number,
+        default: 0,
+        required: false,
+    },
+    currency: {
+        type: String,
+        default:"NGN",
+        required: false,
+    },
     dateCreated: {
         type: Date,
         default: Date.now(),
         required:false
     },
+    lastDepositDate: Date,
+    lastIncrementDate: Date,
     resetPasswordToken: String,
     resetPasswordExpires: Date
 

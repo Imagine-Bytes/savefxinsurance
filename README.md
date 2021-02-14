@@ -1,12 +1,12 @@
-# savefxinsurance
+# goldfxinsurance
 
 ### Frontend
 #### Basic structures
 
 
 - [ ] Signup page struct
-- [x] Login page struct
-- [x] home page struct
+
+- [ ] home page struct
 - [ ] deposit page struct
 - [ ] withdraw page struct
 - [ ] menu struct
@@ -18,8 +18,8 @@
 
 #### Styling (mobile first approach)
 - [ ] login page style
-- [x] Signup page style
-- [x] home page style
+- [ ] Signup page style
+- [ ] home page style
 - [ ] deposit page style
 - [ ] withdraw page style
 - [ ] menu style
@@ -30,11 +30,11 @@
 - [ ] admin style
 
 ### Backend
-### ✔✔ auth with oauth
-### ✔✔ balance increment
-### ✔✔ confirm email address
-### ✔✔ forgot password
-- [ ] flutterwave integration
-- [ ] customer care messaging system
 - [ ] routes
+- [ ] auth with oauth
+- [ ] balance increment
+- [ ] flutterwave integration
+- [ ] confirm email address
+- [ ] forgot password
+- [ ] customer care messaging system
 - [ ] admin controls (delete accounts, confirm withdrawals and bitcoin deposits, customer care service)

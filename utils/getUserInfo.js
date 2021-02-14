@@ -1,19 +1,15 @@
-const axios = require ('axios');
+
+import axios from 'axios';
 
 async function getInfo(access_token) {
-  try {
-    const { data } = await axios({
-      url: 'https://www.googleapis.com/oauth2/v2/userinfo',
-      method: 'get',
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
-    return data;
-  }
-  catch {
-    console.log("User information could not be retrieved")
-  }
+  const { data } = await axios({
+    url: 'https://api.github.com/user',
+    method: 'get',
+    headers: {
+      Authorization: `token ${access_token}`,
+    },
+  });
+  console.log(data); // { id, email, name, login, avatar_url }
+  return data;
 };
-
 module.exports =  getInfo

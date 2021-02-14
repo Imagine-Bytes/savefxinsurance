@@ -31,7 +31,7 @@ const sendMail = (req, user) => {
       to: req.body.email,
       subject: "Your Activation Link for your Account",
       html: ` <h3 style=" color:rgb(92, 61, 180); font-size: xx-large; font-weight: lighter; font-family: sans-serif;">
-      Welcome to SaveFX </h3>
+      Welcome to DevStack </h3>
       <p style="font-size: x-large; font-weight: lighter; font-family: sans-serif;">
          Glad to see you join our ever-growing inverstment platform.
          <br>
